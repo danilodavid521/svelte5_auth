@@ -42,7 +42,7 @@
 				use:enhance={handleSubmit}
 				class="space-y-6"
 			>
-				<input type="hidden" name="user_id" bind:value={data.profile.user_id} />
+				<input type="hidden" name="user_id" bind:value={data.profile.id} />
 
 				<div>
 					<Label for="avatar">Profile Picture</Label>

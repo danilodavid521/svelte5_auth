@@ -17,7 +17,7 @@
 			{data.profile.user_id}
 		</p>
 		<p>
-			{data.user?.bio}
+			{data.profile?.bio}
 		</p>
 	</div>
 </main>
