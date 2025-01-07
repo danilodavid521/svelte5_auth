@@ -48,7 +48,7 @@ export const profiles = pgTable(
 	]
 );
 
-export type InsetUser = typeof profiles.$inferInsert;
+export type InsertUser = typeof profiles.$inferInsert;
 export type SelectUser = typeof profiles.$inferSelect;
 
 // export const usersRelations = relations(users, ({ one }) => ({

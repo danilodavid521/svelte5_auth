@@ -1,7 +1,7 @@
 import type { SupabaseClient } from '@supabase/supabase-js';
-import type { InsetUser } from './schema';
+import type { InsertUser } from './schema';
 
-export async function createUser(supabase: SupabaseClient, user: InsetUser) {
+export async function createUser(supabase: SupabaseClient, user: InsertUser) {
 	const { data, error } = await supabase.from('profiles').insert(user).select().single();
 
 	if (error) throw error;
@@ -22,7 +22,7 @@ export async function getAllUsers(supabase: SupabaseClient, user_id: string) {
 	return data;
 }
 
-export async function updateUser(supabase: SupabaseClient, id: string, user: Partial<InsetUser>) {
+export async function updateUser(supabase: SupabaseClient, id: string, user: Partial<InsertUser>) {
 	const { data, error } = await supabase
 		.from('profiles')
 		.update(user)
