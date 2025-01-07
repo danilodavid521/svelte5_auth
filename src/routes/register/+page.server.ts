@@ -11,7 +11,6 @@ export const actions: Actions = {
 	default: async ({ request, locals: { supabase } }) => {
 		const formData = await request.formData();
 		const email = formData.get('email') as string;
-		const username = formData.get('username') as string;
 		const password = formData.get('password') as string;
 		const confirmPassword = formData.get('confirmPassword') as string;
 
@@ -19,18 +18,25 @@ export const actions: Actions = {
       return fail(400, {
         error: 'Passwords do not match',
         email,
-				username
       });
     }
 
-		const { error } = await supabase.auth.signUp({
+		const { error: signupError, data: signupData } = await supabase.auth.signUp({
 			email: email,
 			password: password
 		});
 
-		if (error) {
-			return fail(400, { error: error.message, email });
+		if (signupError) {
+			return fail(400, { error: signupError.message, email });
 		}
+
+
+		// Create profile after successful registration
+		const { error: profileError } = await supabase
+			.from('profiles')
+			.insert([{ user_id: signupData.user!.id }]);
+		
+		if (profileError) throw profileError;
 
 		return { success: true, email };
 	}

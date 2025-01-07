@@ -46,20 +46,6 @@
 				</div>
 
 				<div>
-					<label for="username" class="block text-sm font-medium text-gray-700"> Username </label>
-					<div class="mt-1">
-						<input
-							id="username"
-							name="username"
-							type="text"
-							required
-							value={form?.username ?? ''}
-							class="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500 sm:text-sm"
-						/>
-					</div>
-				</div>
-
-				<div>
 					<label for="password" class="block text-sm font-medium text-gray-700"> Password </label>
 					<div class="mt-1">
 						<input
