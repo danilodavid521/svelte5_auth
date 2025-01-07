@@ -18,5 +18,5 @@
 			<p class="text-muted-foreground">Here's a list of users in the system!</p>
 		</div>
 	</div>
-	<DataTable data={data.users} {columns} onRowClick={(id: string) => goto(`/${id}/`)} />
+	<DataTable data={data.users} {columns} onRowClick={(id: string) => goto(`/${id}/profile`)} />
 </main>
