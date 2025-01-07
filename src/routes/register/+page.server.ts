@@ -30,11 +30,10 @@ export const actions: Actions = {
 			return fail(400, { error: signupError.message, email });
 		}
 
-
 		// Create profile after successful registration
 		const { error: profileError } = await supabase
 			.from('profiles')
-			.insert([{ user_id: signupData.user!.id }]);
+			.insert([{ id: crypto.randomUUID(), user_id: signupData.user!.id }]);
 		
 		if (profileError) throw profileError;
 
