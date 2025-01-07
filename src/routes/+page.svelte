@@ -4,7 +4,6 @@
 	import { columns } from '$lib/data/columns';
 
 	const { data } = $props();
-	$inspect(data.users);
 </script>
 
 <svelte:head>
@@ -12,7 +11,7 @@
 </svelte:head>
 
 <main class="mx-auto flex w-full max-w-7xl flex-col">
-	<div class="flex items-center justify-between space-y-2">
+	<div class="flex items-center justify-between space-y-2 py-5">
 		<div>
 			<h2 class="text-2xl font-bold tracking-tight">Users</h2>
 			<p class="text-muted-foreground">Here's a list of users in the system!</p>

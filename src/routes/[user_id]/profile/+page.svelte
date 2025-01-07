@@ -9,10 +9,15 @@
 			<p class="text-muted-foreground">Profile details</p>
 		</div>
 		{#if data.user && data.user.id == data.profile.user_id}
-			<a href={'profile/edit'}> Edit profile </a>
+			<a href={'profile/edit'} class="font-semibold hover:underline"> Edit profile </a>
 		{/if}
 	</div>
-	<div class="mt-5">
-		{data.user?.id}
+	<div class="mt-5 flex flex-col gap-3">
+		<p>
+			{data.user?.id}
+		</p>
+		<p>
+			{data.user?.bio}
+		</p>
 	</div>
 </main>
