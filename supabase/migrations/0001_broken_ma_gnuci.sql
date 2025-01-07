@@ -1,0 +1,1 @@
+ALTER POLICY "Public profiles are visible to everyone" ON "profiles" TO anon,authenticated USING (true);

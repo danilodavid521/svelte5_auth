@@ -24,7 +24,7 @@ export const profiles = pgTable(
 		// Select policy
 		pgPolicy('Public profiles are visible to everyone', {
 			as: 'permissive',
-			to: 'anon',
+			to: ['anon', authenticatedRole],
 			for: 'select',
 			using: sql`true`
 		}),

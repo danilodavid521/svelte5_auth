@@ -15,8 +15,8 @@ export async function getUser(supabase: SupabaseClient, id: string) {
 	return data;
 }
 
-export async function getAllUsers(supabase: SupabaseClient, user_id: string) {
-	const { data, error } = await supabase.from('profiles').select().eq('user_id', user_id);
+export async function getAllUsers(supabase: SupabaseClient) {
+	const { data, error } = await supabase.from('profiles').select();
 
 	if (error) throw error;
 	return data;
