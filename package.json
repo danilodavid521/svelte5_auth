@@ -16,7 +16,8 @@
 		"format": "prettier --write .",
 		"supabase:init": "supabase init",
 		"supabase:start": "supabase start",
-		"supabase:stop": "supabase stop"
+		"supabase:stop": "supabase stop",
+		"supabase:status": "supabase status"
 	},
 	"devDependencies": {
 		"@sveltejs/adapter-auto": "^3.0.0",
