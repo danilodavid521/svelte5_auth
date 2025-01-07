@@ -1,0 +1,71 @@
+<script lang="ts">
+	import { enhance } from '$app/forms';
+	import { Button } from '$lib/components/ui/button';
+	import { Input } from '$lib/components/ui/input';
+	import { Label } from '$lib/components/ui/label';
+	import { Loader2 } from 'lucide-svelte';
+
+	interface Props {
+		form?: { email?: string; password?: string; error?: string };
+	}
+
+	let { form = {} }: Props = $props();
+
+	let loading = $state(false);
+	let email = $state(form.email || '');
+	let password = $state(form.password || '');
+
+	let error: string | null = $state(null);
+
+	function handleSubmit() {
+		loading = true;
+		return async ({ result, update }) => {
+			console.log(result);
+			if (result.type === 'failure') {
+				error = result.data?.error;
+				email = result.data?.email || email;
+			} else if (result.type === 'success') {
+			}
+			await update({ reset: false });
+			loading = false;
+		};
+	}
+</script>
+
+<form method="POST" use:enhance={handleSubmit} class="space-y-4">
+	<div class="space-y-2">
+		<Label for="email">Email</Label>
+		<Input
+			id="email"
+			name="email"
+			type="email"
+			placeholder="name@example.com"
+			required
+			bind:value={email}
+			disabled={loading}
+		/>
+	</div>
+
+	<div class="space-y-2">
+		<Label for="email">Password</Label>
+		<Input
+			id="password"
+			name="password"
+			type="password"
+			required
+			bind:value={password}
+			disabled={loading}
+		/>
+	</div>
+
+	{#if error}
+		<p class="text-sm text-red-500">{error}</p>
+	{/if}
+
+	<Button type="submit" class="w-full" disabled={loading}>
+		{#if loading}
+			<Loader2 class="mr-2 h-4 w-4 animate-spin" />
+		{/if}
+		Signup
+	</Button>
+</form>
