@@ -13,8 +13,8 @@
 		{/if}
 	</div>
 	<div class="mt-5 flex flex-col gap-3">
-		<p>
-			{data.user?.id}
+		<p class="text-lg">
+			{data.profile.user_id}
 		</p>
 		<p>
 			{data.user?.bio}

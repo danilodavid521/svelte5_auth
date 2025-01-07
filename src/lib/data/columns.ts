@@ -10,7 +10,7 @@ export type User = {
 
 export const columns: ColumnDef<User>[] = [
 	{
-		accessorKey: 'id',
+		accessorKey: 'user_id',
 		header: 'ID'
 	},
 	{
