@@ -27,14 +27,18 @@ export const actions: Actions = {
 		const user_id = formData.get('user_id') as string;
 		const avatar = formData.get('avatar') as File;
 
-		const avatar_url = 'avatar';
+		let avatar_url = '';
 		if (avatar.size > 0) {
-			// const { data: uploadData, error: uploadError } = await supabase.storage
-			// 	.from('avatars')
-			// 	.upload(`${user.id}/${Date.now()}`, avatar);
-			// if (uploadError) throw uploadError;
-			// avatar_url = uploadData.path;
+			// const buffer = await avatar.arrayBuffer();
+			// const base64String = Buffer.from(buffer).toString('base64');
+
+			const { data: uploadData, error: uploadError } = await supabase.storage
+				.from('avatars')
+				.upload(`${user.id}/${Date.now()}`, avatar);
+			if (uploadError) throw uploadError;
+			avatar_url = uploadData.path;
 		}
+		console.log('avatar_url', avatar_url);
 
 		await updateUser(supabase, user_id, {
 			bio,
