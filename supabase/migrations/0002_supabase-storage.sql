@@ -2,8 +2,8 @@
 DELETE FROM storage.objects WHERE bucket_id = 'avatars';
 DELETE FROM storage.buckets WHERE id = 'avatars';
 
-INSERT INTO storage.buckets (id, name, created_at, updated_at) 
-VALUES ('avatars', 'avatars', now(), now());
+INSERT INTO storage.buckets (id, name, public) 
+VALUES ('avatars', 'avatars', true);
 
 CREATE POLICY "Users can upload avatar image"
 ON storage.objects FOR INSERT 
