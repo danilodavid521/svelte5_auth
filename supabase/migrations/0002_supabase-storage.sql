@@ -11,12 +11,13 @@ TO authenticated
 WITH CHECK (
   bucket_id = 'avatars'
 );
+
 CREATE POLICY "Users can get their own avatar image"
-ON storage.objects FOR UPDATE
+ON storage.objects FOR SELECT
 TO authenticated
 USING (
   bucket_id = 'avatars' AND
-  (auth.uid())::text = (SELECT user_id::text FROM profiles WHERE user_id = auth.uid()::text)
+  (auth.uid())::text = owner::text
 );
 
 CREATE POLICY "Users can update their own avatar image"
@@ -24,7 +25,7 @@ ON storage.objects FOR UPDATE
 TO authenticated
 USING (
   bucket_id = 'avatars' AND
-  (auth.uid())::text = (SELECT user_id::text FROM profiles WHERE user_id = auth.uid()::text)
+  (auth.uid())::text = owner::text
 );
 
 CREATE POLICY "Users can delete their own avatar image"
@@ -32,5 +33,5 @@ ON storage.objects FOR DELETE
 TO authenticated
 USING (
   bucket_id = 'avatars' AND
-  (auth.uid())::text = (SELECT user_id::text FROM profiles WHERE user_id = auth.uid()::text)
+  (auth.uid())::text = owner::text
 );

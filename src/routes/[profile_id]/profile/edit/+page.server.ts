@@ -6,15 +6,20 @@ export const load: PageServerLoad = async ({ locals: { user, supabase }, params 
 	if (!params.profile_id) error(404, { message: 'No user found' });
 	if (!user?.id) error(403, { message: 'Unauthorized' });
 
+	let avatar_url = '';
 	const profileData = await getUser(supabase, params.profile_id);
 
 	if (profileData.user_id !== user.id) error(403, { message: 'Unauthorized' });
-	const {
-		data: { publicUrl }
-	} = await supabase.storage.from('avatars').getPublicUrl(profileData.avatar_url); // Use your actual image path
+
+	if (profileData.avatar_url) {
+		const {
+			data: { publicUrl }
+		} = await supabase.storage.from('avatars').getPublicUrl(profileData.avatar_url); // Use your actual image path
+		avatar_url = publicUrl;
+	}
 
 	return {
-		profile: { ...profileData, avatar_url: publicUrl },
+		profile: { ...profileData, avatar_url },
 		user
 	};
 };
@@ -32,21 +37,26 @@ export const actions: Actions = {
 
 		let avatar_url = '';
 		if (avatar.size > 0) {
-			// const buffer = await avatar.arrayBuffer();
-			// const base64String = Buffer.from(buffer).toString('base64');
+			// Use consistent filename based on user_id
+			const fileExt = avatar.name.split('.').pop();
+			const fileName = `${user_id}/${user_id}.${fileExt}`;
 
 			const { data: uploadData, error: uploadError } = await supabase.storage
 				.from('avatars')
-				.upload(`${user.id}/${Date.now()}`, avatar);
+				.upload(fileName, avatar, {
+					upsert: true
+				});
+
 			if (uploadError) throw uploadError;
 			avatar_url = uploadData.path;
 		}
-		console.log('avatar_url', avatar_url);
 
-		await updateUser(supabase, user_id, {
-			bio,
-			avatar_url
-		});
+		const updateData: { [key: string]: string } = { bio };
+
+		if (avatar_url !== '') {
+			updateData.avatar_url = avatar_url;
+		}
+		await updateUser(supabase, user_id, updateData);
 
 		throw redirect(302, '/');
 	}
