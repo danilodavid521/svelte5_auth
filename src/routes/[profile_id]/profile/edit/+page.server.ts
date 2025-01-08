@@ -14,7 +14,7 @@ export const load: PageServerLoad = async ({ locals: { user, supabase }, params 
 	if (profileData.avatar_url) {
 		const {
 			data: { publicUrl }
-		} = await supabase.storage.from('avatars').getPublicUrl(profileData.avatar_url); // Use your actual image path
+		} = await supabase.storage.from('avatars').getPublicUrl(profileData.avatar_url);
 		avatar_url = publicUrl;
 	}
 
