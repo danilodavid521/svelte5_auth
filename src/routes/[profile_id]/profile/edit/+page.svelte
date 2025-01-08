@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
+	import PhotoUploader from '$lib/components/PhotoUploader.svelte';
 	import { Button } from '$lib/components/ui/button';
 	import { Label } from '$lib/components/ui/label';
 	import { Loader2 } from 'lucide-svelte';
@@ -21,8 +22,6 @@
 			loading = false;
 		};
 	}
-
-	$inspect(data);
 </script>
 
 <main class="mx-auto flex w-full max-w-7xl flex-col">
@@ -46,11 +45,7 @@
 			>
 				<input type="hidden" name="user_id" bind:value={data.profile.id} />
 
-				<div>
-					<Label for="avatar">Profile Picture</Label>
-
-					<input type="file" id="avatar" name="avatar" accept="image/*" class="w-full" />
-				</div>
+				<PhotoUploader />
 
 				<div>
 					<Label for="bio">Bio</Label>
