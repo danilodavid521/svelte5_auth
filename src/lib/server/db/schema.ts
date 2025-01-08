@@ -1,5 +1,5 @@
-import { pgTable, text, timestamp, pgPolicy, uuid } from 'drizzle-orm/pg-core';
 import { sql } from 'drizzle-orm';
+import { pgPolicy, pgTable, text, timestamp, uuid } from 'drizzle-orm/pg-core';
 import { authenticatedRole } from 'drizzle-orm/supabase';
 
 // export const users = pgTable('users', {

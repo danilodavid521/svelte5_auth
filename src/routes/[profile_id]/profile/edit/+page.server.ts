@@ -1,12 +1,17 @@
 import { getUser, updateUser } from '$lib/server/db/users';
-import { error, fail, redirect, type Actions } from '@sveltejs/kit';
+import { error, redirect, type Actions } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
 
 export const load: PageServerLoad = async ({ locals: { user, supabase }, params }) => {
-	if (!params.user_id) throw fail(404, { message: 'No user found' });
+	if (!params.profile_id) error(404, { message: 'No user found' });
+	if (!user?.id) error(403, { message: 'Unauthorized' });
+
+	const profileData = await getUser(supabase, params.profile_id);
+
+	if (profileData.user_id !== user.id) error(403, { message: 'Unauthorized' });
 
 	return {
-		profile: await getUser(supabase, params.user_id),
+		profile: profileData,
 		user
 	};
 };
@@ -14,7 +19,7 @@ export const load: PageServerLoad = async ({ locals: { user, supabase }, params 
 export const actions: Actions = {
 	updateProfile: async ({ request, locals: { supabase, user } }) => {
 		if (!user) {
-			throw error(403, 'Unauthorized');
+			error(403, 'Unauthorized');
 		}
 
 		const formData = await request.formData();

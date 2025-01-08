@@ -21,6 +21,8 @@
 			loading = false;
 		};
 	}
+
+	$inspect(data);
 </script>
 
 <main class="mx-auto flex w-full max-w-7xl flex-col">
