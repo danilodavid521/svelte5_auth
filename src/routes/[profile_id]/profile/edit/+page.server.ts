@@ -9,9 +9,12 @@ export const load: PageServerLoad = async ({ locals: { user, supabase }, params 
 	const profileData = await getUser(supabase, params.profile_id);
 
 	if (profileData.user_id !== user.id) error(403, { message: 'Unauthorized' });
+	const {
+		data: { publicUrl }
+	} = await supabase.storage.from('avatars').getPublicUrl(profileData.avatar_url); // Use your actual image path
 
 	return {
-		profile: profileData,
+		profile: { ...profileData, avatar_url: publicUrl },
 		user
 	};
 };

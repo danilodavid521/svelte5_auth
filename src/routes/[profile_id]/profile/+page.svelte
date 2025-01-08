@@ -2,6 +2,10 @@
 	const { data } = $props();
 </script>
 
+<svelte:head>
+	<title>User profile</title>
+</svelte:head>
+
 <main class="mx-auto flex w-full max-w-7xl flex-col">
 	<div class="flex items-center justify-between space-y-2">
 		<div>
