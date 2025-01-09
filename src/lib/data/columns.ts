@@ -11,7 +11,10 @@ export type User = {
 export const columns: ColumnDef<User>[] = [
 	{
 		accessorKey: 'user_id',
-		header: 'ID'
+		header: 'ID',
+		cell: ({ row }) => {
+			return row.index + 1;
+		}
 	},
 	{
 		accessorKey: 'bio',
@@ -20,5 +23,9 @@ export const columns: ColumnDef<User>[] = [
 	{
 		accessorKey: 'avatar_url',
 		header: 'Avatar'
+	},
+	{
+		accessorKey: 'updated_at',
+		header: 'Joined'
 	}
 ];
