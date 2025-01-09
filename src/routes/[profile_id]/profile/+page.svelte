@@ -17,6 +17,9 @@
 		{/if}
 	</div>
 	<div class="mt-5 flex flex-col gap-3">
+		{#if data.avatar_url}
+			<img src={data.avatar_url} alt="avatar" class="h-32 w-32 rounded-full object-cover" />
+		{/if}
 		<p class="text-lg">
 			{data.profile.user_id}
 		</p>
