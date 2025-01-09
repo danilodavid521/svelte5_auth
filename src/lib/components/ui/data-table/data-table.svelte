@@ -60,7 +60,7 @@
 
 <div>
 	<div class="rounded-md border">
-		<Table.Root>
+		<Table.Root class="border">
 			<Table.Header>
 				{#each table.getHeaderGroups() as headerGroup (headerGroup.id)}
 					<Table.Row>

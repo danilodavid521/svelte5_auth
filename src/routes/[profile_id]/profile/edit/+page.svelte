@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
 	import PhotoUploader from '$lib/components/PhotoUploader.svelte';
-	import { Button } from '$lib/components/ui/button';
+	import { Button, buttonVariants } from '$lib/components/ui/button';
 	import { Label } from '$lib/components/ui/label';
 	import { Loader2 } from 'lucide-svelte';
 
@@ -28,7 +28,7 @@
 	<title>User profile edit</title>
 </svelte:head>
 
-<main class="mx-auto flex w-full max-w-7xl flex-col">
+<main class="mx-auto flex w-full max-w-5xl flex-col">
 	<div class="flex items-center justify-between space-y-2">
 		<div>
 			<h2 class="text-2xl font-bold tracking-tight">Edit profile data</h2>
@@ -67,6 +67,12 @@
 						<Loader2 class="mr-2 h-4 w-4 animate-spin" />
 					{/if}
 					{'Update'}
+				</Button>
+				<Button
+					onclick={() => window.history.back()}
+					class="w-full font-semibold hover:underline {buttonVariants({ variant: 'secondary' })}"
+				>
+					Cancel
 				</Button>
 			</form>
 		</div>
