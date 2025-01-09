@@ -1,6 +1,8 @@
 <script lang="ts">
 	import { page } from '$app/state';
 	import { buttonVariants } from './ui/button';
+	import Button from '$lib/components/ui/button/button.svelte';
+	import { LogOut } from 'lucide-svelte';
 
 	const { session } = $props();
 </script>
@@ -9,7 +11,10 @@
 	<div class="mx-auto flex w-full max-w-6xl flex-row items-center justify-end gap-3">
 		{#if session}
 			<form action="/logout?/logout" method="POST">
-				<button type="submit" class="hover:underline">Logout</button>
+				<Button type="submit" variant="outline" class="hover:underline">
+					<LogOut />
+					Logout
+				</Button>
 			</form>
 		{:else}
 			<a
