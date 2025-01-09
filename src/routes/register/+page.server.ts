@@ -15,11 +15,11 @@ export const actions: Actions = {
 		const confirmPassword = formData.get('confirmPassword') as string;
 
 		if (password !== confirmPassword) {
-      return fail(400, {
-        error: 'Passwords do not match',
-        email,
-      });
-    }
+			return fail(400, {
+				error: 'Passwords do not match',
+				email
+			});
+		}
 
 		const { error: signupError, data: signupData } = await supabase.auth.signUp({
 			email: email,
@@ -33,8 +33,8 @@ export const actions: Actions = {
 		// Create profile after successful registration
 		const { error: profileError } = await supabase
 			.from('profiles')
-			.insert([{ id: crypto.randomUUID(), user_id: signupData.user!.id }]);
-		
+			.insert([{ id: crypto.randomUUID(), user_id: signupData.user!.id, email }]);
+
 		if (profileError) throw profileError;
 
 		return { success: true, email };

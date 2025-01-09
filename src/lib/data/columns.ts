@@ -14,10 +14,14 @@ export type User = {
 export const columns: ColumnDef<User>[] = [
 	{
 		accessorKey: 'user_id',
-		header: 'ID',
+		header: 'No',
 		cell: ({ row }) => {
 			return row.index + 1;
 		}
+	},
+	{
+		accessorKey: 'email',
+		header: 'Email'
 	},
 	{
 		accessorKey: 'bio',

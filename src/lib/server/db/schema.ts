@@ -17,6 +17,7 @@ export const profiles = pgTable(
 			// .references(() => users.id, { onDelete: 'cascade' })
 			.notNull(),
 		bio: text('bio'),
+		email: text('email'),
 		avatar_url: text('avatar_url'),
 		updated_at: timestamp('updated_at').defaultNow().notNull()
 	},
