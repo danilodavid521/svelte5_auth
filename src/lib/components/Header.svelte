@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/state';
+	import { buttonVariants } from './ui/button';
 
 	const { session } = $props();
 </script>
@@ -11,12 +12,16 @@
 				<button type="submit" class="hover:underline">Logout</button>
 			</form>
 		{:else}
-			<a class:underline={page.url.pathname == '/login'} class="hover:underline" href="/login">
+			<a
+				class:underline={page.url.pathname == '/login'}
+				class="hover:underline {buttonVariants({ variant: 'default' })} "
+				href="/login"
+			>
 				Login
 			</a>
 			<a
 				class:underline={page.url.pathname == '/register'}
-				class="hover:underline"
+				class="hover:underline {buttonVariants({ variant: 'outline' })}"
 				href="/register"
 			>
 				Register
