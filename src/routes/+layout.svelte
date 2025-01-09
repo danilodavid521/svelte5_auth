@@ -19,6 +19,6 @@
 </script>
 
 <Header {session} />
-<main class="flex h-full min-h-[70vh]">
+<main class="flex h-full min-h-[70vh] pt-5">
 	{@render children()}
 </main>
