@@ -7,7 +7,9 @@
 <header class="mx-auto flex w-full max-w-7xl justify-end py-3">
 	<div class="flex flex-row items-center gap-3">
 		{#if session}
-			<a class="hover:underline" href="/logout"> Logout </a>
+			<form action="/logout?/logout" method="POST">
+				<button type="submit" class="hover:underline">Logout</button>
+			</form>
 		{:else}
 			<a class:underline={page.url.pathname == '/login'} class="hover:underline" href="/login">
 				Login
